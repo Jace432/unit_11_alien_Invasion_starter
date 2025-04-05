@@ -1,10 +1,3 @@
-"""
-Main module for the Alien Invasion Game.
-
-Initializes pygame, creates game window and screen settings, creates the game
-assets and draws them on screen, runs the game loop. 
-"""
-
 import sys
 import pygame
 from settings import Settings
@@ -12,10 +5,8 @@ from ship import Ship
 from arsenal import Arsenal
 
 class AlienInvasion:
-    """Class to manage the assets and behavior of Alien Invasion game"""
     
     def __init__(self) -> None:
-        """Initialize pygame and game settings"""
         pygame.init()
         self.settings = Settings()
 
@@ -39,7 +30,7 @@ class AlienInvasion:
         self.ship = Ship(self, Arsenal(self))
 
     def run_game(self) -> None:
-        """Main game loop"""
+        # Game Loop
         while self.running:
             self._check_events()
             self.ship.update()
@@ -47,13 +38,11 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS)
 
     def _update_screen(self):
-        """Update screen each time game loops"""
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         pygame.display.flip()
 
     def _check_events(self):
-        """Controls response to key actions"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running == False
@@ -66,14 +55,12 @@ class AlienInvasion:
                 self._check_keyup_events(event)
 
     def _check_keyup_events(self, event) -> None:
-        """Controls what happens when a key is released"""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
     def _check_keydown_events(self, event) -> None:
-        """Controls what happens when a key is pressed"""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:

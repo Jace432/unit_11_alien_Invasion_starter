@@ -1,10 +1,3 @@
-"""
-Provides Ship Class for the Alien Invasion Game.
-
-Ship Class manages the controls, movement, and overall interaction of the ship 
-and the arsenal.
-"""
-
 import pygame
 from typing import TYPE_CHECKING
 
@@ -13,11 +6,9 @@ if TYPE_CHECKING:
     from arsenal import Arsenal
 
 class Ship:
-    """Class for the spaceship in Alien Invasion Game"""
     
     
     def __init__(self, game: "AlienInvasion", arsenal: "Arsenal") -> None:
-        """Initialize ship and position """
         self.game        = game
         self.settings    = game.settings
         self.screen      = game.screen
@@ -36,7 +27,7 @@ class Ship:
         self.arsenal        = arsenal
     
     def update(self) -> None:
-        """Updates ship position and arsenal"""
+        # Updating the position of the ship
         self._update_ship_movement()
         self.arsenal.update_arsenal()
 
@@ -44,7 +35,6 @@ class Ship:
         self.rect.x = self.x
 
     def _update_ship_movement(self):
-        """Updates ship movement and ensures ship stays on screen"""
         temp_speed = self.settings.ship_speed
         if self.moving_right and self.rect.right < self.boundaries.right:
             self.x += temp_speed
@@ -52,10 +42,8 @@ class Ship:
             self.x -= temp_speed
 
     def draw(self) -> None:
-        """Draws the ship on screen"""
         self.arsenal.draw()
         self.screen.blit(self.image, self.rect)
 
     def fire(self) -> bool:
-        """Tells arsenal to fire bullet"""
         return self.arsenal.fire_bullet()
