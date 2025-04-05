@@ -1,3 +1,9 @@
+"""
+Provides Bullet Class for representing bullets in the Alien Invasion game.
+
+Bullet Class manages the controls, drawing and appearance of bullets.
+"""
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
@@ -6,7 +12,9 @@ if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
 
 class Bullet(Sprite):
+    """Creates a bullet for the ship to fire"""
     def __init__(self, game: "AlienInvasion") -> None:
+        """Initializes bullet"""
         super().__init__()
         self.game     = game
         self.screen   = game.screen
@@ -22,9 +30,11 @@ class Bullet(Sprite):
         self.y = float(self.rect.y)
         
     def update(self) -> None:
+        """Updates bullet position"""
         self.y -= self.settings.bullet_speed
         self.rect.y = self.y
 
     def draw_bullet(self) -> None:
+        """Draws the bullet on screen"""
         self.screen.blit(self.image, self.rect)
         
